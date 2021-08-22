@@ -1,0 +1,195 @@
+{% load static %}
+{% block content %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<style>
+body {
+  font-family: Arial;
+  font-size: 17px;
+  padding: 8px;
+}
+img{
+  border-radius: 10px;
+}
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+  color: black;
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 5px;
+  margin: 10px 0;
+  border: none;
+  width: 40%;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 17px;
+}
+.btn.qqq{
+  background-color:#04AA6D;
+  color: white;
+  padding: 12px 5px;
+  margin: 10px 0;
+  border: none;
+  width: 40%;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 17px;
+}
+.second{
+  width: 100px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+  
+}
+.btn.qqq:hover{
+  background-color: yellow;
+}
+a {
+  color:darkblue;
+}
+a.bbb{
+  color: white;
+}
+hr {
+  border: 1px solid lightgrey;
+}
+
+span.price {
+  float: right;
+  color: black;
+  
+}
+b.ssss{
+  color: red;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+</style>
+</head>
+<body>
+  <div> 
+    <!-- ################################################################################################ -->
+    <div class="wrapper row1">
+      <header id="header" class="hoc clear">
+        <div id="logo" class="fl_left"> 
+          <!-- ################################################################################################ -->
+          <h1><a href="/">Shopyfy</a></h1>
+          
+          <!-- ################################################################################################ -->
+        </div>
+        <nav id="mainav" class="fl_right"> 
+          <!-- ################################################################################################ -->
+          <ul class="clear">
+            <li class="active"><a href="/">Home</a></li>
+
+     
+          </ul>
+          <!-- ################################################################################################ -->
+        </nav>
+      </header>
+    </div>
+  </div>
+<br><br><br>
+<center><h4>Your Cart &nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> <b> {{itc}}</b><span class="price" style="color:white"></span></h4></center>
+{% for i in ci %}
+  <div class="col-25">
+    <div class="container">
+      <br>
+      <a href="{{i.prodt.get_url}}"><img src="{{i.prodt.img.url}}" alt="{{i.prodt.name}}" style="height: 100;width: 150;"></a>
+      <p><strong>{{i.prodt.name}}</strong><span class="price"><i class="fa fa-rupee" style="font-size:20px"> {{i.total}}</i><br></span></p>
+      <p>Product ID: {{i.prodt.id}}</p>
+      <p>Price: {{i.prodt.price}} <i class="fa fa-rupee" style="font-size:15px"></i> x 1 </p> 
+      <p>Qty: <a href="{% url 'addcart' i.prodt.id %}"><i class="fa fa-plus-circle" style="font-size:15px"></i></a>  {{i.quan}}  <a href="{% url 'cart_decrement' i.prodt.id %}"><i class="fa fa-minus-circle" style="font-size:15px"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'cartdelete' i.prodt.id %}"><i class="fas fa-trash"></i></a></p>
+
+        <hr>
+        
+    </div>
+
+  </div>
+  {% endfor %}
+<div>
+<p><span class="price" style="color:white; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><b class="ssss">Total Amount: <i class="fa fa-rupee" style="font-size:15px"></i> {{t}}</b></span></p>
+</div>
+<br><br>
+<div>
+  <br>
+  <br>
+  <br>
+<a class="bbb" href="/"><center><p><b class="btn btn-success">Continue Shoping</b><a href="{% url 'orders' %}">&nbsp;&nbsp;<b class="btn btn-success qqq">Place Order</b></a> </center></a>
+<br><br>
+</div>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="">
+<head>
+<title>shopyfy</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<style>
+  
+.wrappers{
+    background-color: white;
+    padding: 10px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(400px, 1fr));
+    grid-gap: 10px;
+  }
+  img{
+    
+    width: 500px;
+    height: 300px;
+    border-radius:20px;
+    cursor: pointer;  
+  }
+  p{
+    color: black;
+    
+    
+  }
+  h5{
+    color: black;
+  }
+</style>
+</head>
+<body id="top">
+
+
+
+
+    <div class="wrappers" id="prod">
+  
+      {% for i in pr %}
+      
+      <div class="box">
+        <figure><a href="{{i.get_url}}"><img src="{{i.img.url}}"></a><br><br>
+        <figcaption>
+        <h5>{{i.name}}</h5>
+        <p>Rs {{i.price}}</p>
+      <p>Stock {{i.stock}}</p>
+    </figcaption>
+  </figure>
+      </div>
+   
+      {% endfor %}
+    </div>
+
+
+
+    <hr class="btmspace-80">
+
+    <div class="clear"></div>
+  </main>
+</div>
+
+</div>
+
+<script src="{% static 'layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.mobilemenu.js' %}"></script>
+</body>
+</html>
+{% endblock %}

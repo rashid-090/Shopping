@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="">
+<head>
+<title>Shopyfy</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<style>
+
+  .container{
+    background-color: white;
+  }
+  .wrappers{
+    background-color: white;
+    padding: 20px;
+    padding-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
+    grid-gap: 10px;
+  }
+  img{
+    
+    width: 500px;
+    height: 300px;
+    border-radius:40px;
+    cursor: pointer;  
+  }
+
+  p{
+    color: black;
+  }
+  h5{
+    color: black;
+  }
+ .prof{
+   background-size: cover;
+   display: grid;
+   grid-template-columns: repeat(auto-fit);
+   height: 600px;
+ }
+
+ .btn{
+    border-radius: 50px;
+ }
+ .uuuu{
+   border-radius: 20px;
+ }
+ #backtotop{
+   border-radius: 20px;
+ }
+ .heading{
+   color: white;
+   font-size: xx-large;
+ }
+
+</style>
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  
+
+   
+
+    <div class="prof" style="background-image:url({% static 'images/demo/backgrounds/ban2.jpg' %});">
+
+          
+      <div id="topbar">
+        <div class="fl_right"> 
+          <!-- ################################################################################################ -->
+          <ul class="nospace">
+    
+            <li id="searchform">Search Items&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+              
+              <div class="">
+                <form action="{% url 'search' %}" method="GET">
+                  {% csrf_token %}
+                  <fieldset>
+                    <legend>Quick Search:</legend>
+                    <input type="text" class="uuuu" placeholder="Enter search items&hellip;" name="q">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                  </fieldset>
+                </form>
+              </div>
+            </li>
+          </ul>
+          
+          </div>
+        </div>
+        <center><h1 class="heading">Welcome To Shopyfy</h1></center>
+        <footer><center><a class="btn" href="#prod">Check Our Products</a></center></footer>
+
+    <div id="pageintro" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+
+
+      
+      <!-- <article>
+
+        
+         
+        
+        <h3 class="heading">WELCOME TO Shopyfy</h3>
+        <h2>Quality items</h2>
+        <footer><a class="btn" href="#prod">Check Our Products</a></footer>
+      </article> -->
+      <!-- ################################################################################################ -->
+      
+    </div>
+    
+  </div>
+  <!-- ################################################################################################ -->
+  
+</div>
+
+
+<div class="wrappers" id="prod">
+  
+  {% for i in pg.object_list %}
+  
+  <div class="box"><a href="{{i.get_url}}"><img src="{{i.img.url}}"></a><br><br>
+    <center><h5>{{i.name}}</h5>
+    <p>{{i.price}} <i class="fa fa-rupee" style="font-size:15px"></i></p></center>
+  </div>
+
+  {% endfor %}
+
+</div>
+<br>
+<center>
+  {% for p in pg.paginator.page_range %}
+
+<a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p %} active {% endif %}">{{p}}</a>
+
+  {% endfor %}
+</center>
+ 
+<br><br>
+
+<div class="wrapper">
+  <div id="copyright" class="hoc clear"> 
+ 
+    
+    <p class="fl_left"><a href="#">Copyright &copy; 2021 - All Rights Reserved</a></p>
+    <p class="fl_right"><a target="_blank" href="" title="Free Website Templates">www.shopyfy.com</a></p>
+  
+    
+  </div>
+</div>
+
+
+
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="{% static 'layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.mobilemenu.js' %}"></script>
+</body>
+</html>
+{% endblock %}

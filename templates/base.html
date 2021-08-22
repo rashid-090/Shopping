@@ -1,0 +1,83 @@
+{% load static %}
+<html lang="">
+<head>
+<title>shopyfy</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<style>
+
+  .rrrr{
+    color:purple;
+    
+  }
+</style>
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <div class="fl_left"> 
+      <!-- ################################################################################################ -->
+      <ul class="nospace">
+        {% if user.is_authenticated %}
+        <li><i class="fas fa-phone rgtspace-5"></i> +00 (123) 123 1234 12</li>
+        <li><i class="far fa-envelope rgtspace-5"></i> shopyfy@gmail.com.com</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li class="rrrr">welcome -&nbsp;&nbsp;{{user.username}}</li>
+        {% else %}
+        <li><i class="fas fa-phone rgtspace-5"></i> +00 (123) 123 1234 12</li>
+        <li><i class="far fa-envelope rgtspace-5"></i> shopyfy@gmail.com.com</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li><strong>Register for more options</strong></li>
+        {% endif %}
+      </ul>
+      <!-- ################################################################################################ -->
+    </div>
+ 
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div> 
+  <!-- ################################################################################################ -->
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left"> 
+        <!-- ################################################################################################ -->
+        <h1><a href="/">Shopyfy</a></h1>
+        <!-- ################################################################################################ -->
+      </div>
+      <nav id="mainav" class="fl_right"> 
+        <!-- ################################################################################################ -->
+        <ul class="clear">
+          
+          <li class="active"><a href="/">Home</a></li>
+          <li><a class="drop" href="#">Categorys</a>
+            <ul>
+              <li><a href="/">All Products</a></li>
+              {% for i in ct %}
+              <li><a href="{{i.get_url}}">{{i.name}}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'cartDetails' %}">Cart</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'register' %}">Register</a></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+        <!-- ################################################################################################ -->
+      </nav>
+    </header>
+  </div>
+</div>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
